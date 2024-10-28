@@ -17,4 +17,9 @@ class Packages extends Model
         'integrationsLimit',
         'productsLimit',
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'packageId');
+    }
 }

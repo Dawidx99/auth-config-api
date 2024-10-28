@@ -13,4 +13,9 @@ class Configuration extends Model
         'currency',
         'taxRate',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'configurationId');
+    }
 }

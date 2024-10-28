@@ -16,33 +16,27 @@ class PackagesController extends Controller
 
     public function store(StorePackagesRequest $request)
     {
-        $package = Packages::create($request->all());
+        $package = Packages::create($request->validated());
 
-
-        return [ 'package' => $package ];
+        return response()->json(['package' => $package], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Packages $packages)
+    public function show(Packages $package)
     {
-        //
+        return response()->json(['package' => $package], 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatePackagesRequest $request, Packages $packages)
+    public function update(UpdatePackagesRequest $request, Packages $package)
     {
-        //
+        $package->update($request->validated());
+
+        return response()->json(['package' => $package], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Packages $packages)
+    public function destroy(Packages $package)
     {
-        //
+        $package->delete();
+
+        return response()->json(['message' => 'Package deleted successfully'], 204);
     }
 }
