@@ -34,6 +34,13 @@ class Handler extends ExceptionHandler
             return response()->json(['message' => 'Resource not found'], 404);
         }
 
+        if ($exception instanceof ValidationException) {
+            return response()->json([
+                'message' => 'Data validation error',
+                'errors' => $exception->errors(),
+            ], 400);
+        }
+
         return parent::render($request, $exception);
     }
 }

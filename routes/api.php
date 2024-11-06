@@ -17,4 +17,6 @@ Route::get('/', function() {
 
 Route::post('/sign-up', [AuthController::class, 'signUp']);
 
-Route::post('/sign-in', [AuthController::class, 'signIn']);
+Route::post('/sign-in', [AuthController::class, 'signIn'])->name('sign-in');
+
+Route::delete('/delete-account', [AuthController::class, 'deleteAccount'])->middleware('auth:sanctum');
